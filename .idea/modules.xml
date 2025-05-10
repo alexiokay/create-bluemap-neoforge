@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/create-bluemap.iml" filepath="$PROJECT_DIR$/.idea/modules/create-bluemap.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/create-bluemap.common.iml" filepath="$PROJECT_DIR$/.idea/modules/common/create-bluemap.common.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/create-bluemap.common.main.iml" filepath="$PROJECT_DIR$/.idea/modules/common/create-bluemap.common.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/create-bluemap.common.test.iml" filepath="$PROJECT_DIR$/.idea/modules/common/create-bluemap.common.test.iml" />

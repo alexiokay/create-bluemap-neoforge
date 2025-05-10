@@ -15,12 +15,12 @@ import java.util.Map;
 public class Trains {
     public static void update(BlueMapAPI api) {
 
-        Map<ResourceKey<Level>, MarkerSet> markerSets = new HashMap<>();
+        Map<ResourceKey<Level>, MarkerSet> POIMarkerSets = new HashMap<>();
 
         Create.RAILWAYS.trains.forEach((uuid, train) -> {
             ResourceKey<Level> level = train.carriages.get(0).getLeadingPoint().node1.getLocation().dimension;
-            if(!markerSets.containsKey(level)) {
-                markerSets.put(level, MarkerSet.builder()
+            if(!POIMarkerSets.containsKey(level)) {
+                POIMarkerSets.put(level, MarkerSet.builder()
                         .label(String.format("Trains in %s",level.location().toShortLanguageKey())).build());
             }
 
@@ -31,10 +31,10 @@ public class Trains {
                     .position(pos.x, pos.y, pos.z)
                     .build();
 
-            markerSets.get(level).put(uuid.toString(), marker);
+            POIMarkerSets.get(level).put(uuid.toString(), marker);
         });
 
-        markerSets.forEach((level, markerSet) -> {
+        POIMarkerSets.forEach((level, markerSet) -> {
             api.getWorld(level).ifPresent(world -> {
                 for(BlueMapMap map : world.getMaps()) {
                     map.getMarkerSets().put(String.format("trains-%s",level.location().toShortLanguageKey()), markerSet);

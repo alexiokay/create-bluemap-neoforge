@@ -17,9 +17,11 @@ public class Watcher {
             Optional<BlueMapAPI> apiOptional = BlueMapAPI.getInstance();
             apiOptional.ifPresent(api -> {
                 Trains.update(api);
+                Tracks.update(api);
             });
         };
         future = scheduler.scheduleAtFixedRate(task, 0, delay, TimeUnit.SECONDS);
+
     }
     public static void stop() {
         future.cancel(false);

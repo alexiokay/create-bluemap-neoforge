@@ -34,5 +34,4 @@ dependencies {
 
     modCompileOnly("com.simibubi.create:create-fabric-$minecraft_version:$create_fabric_version")
 
-//    modLocalRuntime 'de.bluecolored.bluemap:BlueMap:5.3'
 }

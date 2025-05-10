@@ -8,6 +8,7 @@ import de.bluecolored.bluemap.api.BlueMapAPI;
 import de.bluecolored.bluemap.api.BlueMapMap;
 import de.bluecolored.bluemap.api.markers.LineMarker;
 import de.bluecolored.bluemap.api.markers.MarkerSet;
+import de.bluecolored.bluemap.api.math.Color;
 import de.bluecolored.bluemap.api.math.Line;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.Level;
@@ -16,10 +17,10 @@ import net.minecraft.world.phys.Vec3;
 import java.util.*;
 
 public class Tracks {
+    public static boolean renderTracks = true;
     public static void update(BlueMapAPI api) {
-
+        if(!renderTracks) return;
         Map<ResourceKey<Level>, MarkerSet> lineMarkerSets = new HashMap<>();
-
 
         Create.RAILWAYS.trackNetworks.forEach((graphUuid, graph) -> {
             var edges = new HashSet<TrackEdge>();
@@ -39,10 +40,14 @@ public class Tracks {
                 Line.Builder line = Line.builder();
                 for (int i = 0; i < segmentCount; i++) {
                     Vec3 pos = edge.getPosition(graph, (double) i / (segmentCount - 1));
-                    line.addPoint(new Vector3d(pos.x, pos.y, pos.z));
+                    line.addPoint(new Vector3d(pos.x, pos.y+1, pos.z));
                 }
                 LineMarker marker = LineMarker.builder()
                         .line(line.build())
+                        .lineWidth(6)
+                        .maxDistance(300)
+                        .label("edge")
+                        .lineColor(new Color("#777"))
                         .build();
                 lineMarkerSet.put(edge.toString(), marker);
 

@@ -34,7 +34,9 @@ public class Trains {
         Map<ResourceKey<Level>, MarkerSet> POIMarkerSets = new HashMap<>();
 
         Create.RAILWAYS.trains.forEach((uuid, train) -> {
-            ResourceKey<Level> level = train.carriages.get(0).getLeadingPoint().node1.getLocation().dimension;
+            TrackNode node = train.carriages.get(0).getLeadingPoint().node1;
+            if(node == null) return;
+            ResourceKey<Level> level = node.getLocation().dimension;
             if (!POIMarkerSets.containsKey(level)) {
                 POIMarkerSets.put(level, MarkerSet.builder()
                         .label(String.format("Trains in %s", level.location().toShortLanguageKey())).build());

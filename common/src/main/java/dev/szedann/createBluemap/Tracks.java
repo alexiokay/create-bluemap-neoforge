@@ -3,7 +3,6 @@ package dev.szedann.createBluemap;
 import com.flowpowered.math.vector.Vector3d;
 import com.simibubi.create.Create;
 import com.simibubi.create.content.trains.graph.TrackEdge;
-import com.simibubi.create.content.trains.graph.TrackNode;
 import de.bluecolored.bluemap.api.BlueMapAPI;
 import de.bluecolored.bluemap.api.BlueMapMap;
 import de.bluecolored.bluemap.api.markers.LineMarker;
@@ -18,8 +17,10 @@ import java.util.*;
 
 public class Tracks {
     public static boolean renderTracks = true;
+
     public static void update(BlueMapAPI api) {
-        if(!renderTracks) return;
+        if (!renderTracks)
+            return;
         Map<ResourceKey<Level>, MarkerSet> lineMarkerSets = new HashMap<>();
 
         Create.RAILWAYS.trackNetworks.forEach((graphUuid, graph) -> {
@@ -40,7 +41,7 @@ public class Tracks {
                 Line.Builder line = Line.builder();
                 for (int i = 0; i < segmentCount; i++) {
                     Vec3 pos = edge.getPosition(graph, (double) i / (segmentCount - 1));
-                    line.addPoint(new Vector3d(pos.x, pos.y+1, pos.z));
+                    line.addPoint(new Vector3d(pos.x, pos.y + 1, pos.z));
                 }
                 LineMarker marker = LineMarker.builder()
                         .line(line.build())
@@ -57,7 +58,8 @@ public class Tracks {
         lineMarkerSets.forEach((level, markerSet) -> {
             api.getWorld(level).ifPresent(world -> {
                 for (BlueMapMap map : world.getMaps()) {
-                    map.getMarkerSets().put(String.format("tracks-%s", level.location().toShortLanguageKey()), markerSet);
+                    map.getMarkerSets().put(String.format("tracks-%s", level.location().toShortLanguageKey()),
+                            markerSet);
                 }
             });
         });

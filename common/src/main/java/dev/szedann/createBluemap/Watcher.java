@@ -16,10 +16,8 @@ public class Watcher {
     public static void start() {
         CreateBluemap.LOGGER.info("Starting Create Bluemap updater");
         Runnable task = () -> {
-            CreateBluemap.LOGGER.info("Updating map");
             Optional<BlueMapAPI> apiOptional = BlueMapAPI.getInstance();
             apiOptional.ifPresent(api -> {
-                CreateBluemap.LOGGER.info("bluemap api present");
                 try {
                     Trains.update(api);
                     Tracks.update(api);
@@ -27,7 +25,6 @@ public class Watcher {
                     CreateBluemap.LOGGER.error(e.getMessage());
                 }
             });
-            CreateBluemap.LOGGER.info("Updated map {}", apiOptional.isPresent());
         };
         future = scheduler.scheduleAtFixedRate(task, 0, refreshInterval, TimeUnit.SECONDS);
 

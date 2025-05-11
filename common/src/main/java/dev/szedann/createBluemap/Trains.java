@@ -19,8 +19,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Trains {
-    public static boolean renderPOIs = true;
+    public static boolean renderPOIs = false;
     public static boolean renderCarriages = true;
+
+    private static final Color manualColor = new Color("#f99");
+    private static final Color scheduledColor = new Color("#99f");
 
     public static void update(BlueMapAPI api) {
         if (renderPOIs)
@@ -46,13 +49,13 @@ public class Trains {
             var marker = POIMarker.builder()
                     .label(train.name.getString())
                     .position(pos.x, pos.y, pos.z)
+                    .maxDistance(150)
                     .build();
 
             POIMarkerSets.get(level).put(uuid.toString(), marker);
         });
 
         POIMarkerSets.forEach((level, markerSet) -> {
-            CreateBluemap.LOGGER.info("{} trains updated", markerSet.getMarkers().size());
             api.getWorld(level).ifPresent(world -> {
                 for (BlueMapMap map : world.getMaps()) {
                     map.getMarkerSets().put(String.format("trains-%s", level.location().toShortLanguageKey()),
@@ -76,16 +79,20 @@ public class Trains {
 
             int i = 0;
             for (Carriage carriage : train.carriages) {
+                i++;
                 Vec3 p1 = carriage.getLeadingPoint().getPosition(train.graph);
                 Vec3 p2 = carriage.getTrailingPoint().getPosition(train.graph);
+                boolean front = train.currentlyBackwards ? i == train.carriages.size() - 1 : i == 0;
+                boolean scheduled = !train.manualTick;
                 lineMarkerMap.get(level).put(train.id.toString() + "-" + carriage.id, LineMarker.builder()
-                        .label(String.format("%s carriage %s", train.name.getString(), ++i))
+                        .label(String.format("%s carriage %s", train.name.getString(), i))
                         .line(Line.builder()
                                 .addPoint(new Vector3d(p1.x, p1.y + 1, p1.z))
                                 .addPoint(new Vector3d(p2.x, p2.y + 1, p2.z))
                                 .build())
-                        .lineColor(new Color("#99f"))
-                        .lineWidth(5)
+                        .lineColor(scheduled ? scheduledColor : manualColor)
+                        .lineWidth(front ? 7 : 5)
+                        .depthTestEnabled(false)
                         .build());
             }
 
@@ -93,7 +100,6 @@ public class Trains {
 
         lineMarkerMap.forEach((level, markerSet) -> {
             api.getWorld(level).ifPresent(world -> {
-                CreateBluemap.LOGGER.info("{} carriages updated", markerSet.getMarkers().size());
                 for (BlueMapMap map : world.getMaps()) {
                     map.getMarkerSets().put(String.format("carriages-%s", level.location().toShortLanguageKey()),
                             markerSet);

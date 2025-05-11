@@ -3,6 +3,8 @@ package dev.szedann.createBluemap;
 import com.flowpowered.math.vector.Vector3d;
 import com.simibubi.create.Create;
 import com.simibubi.create.content.trains.entity.Carriage;
+import com.simibubi.create.content.trains.entity.TravellingPoint;
+import com.simibubi.create.content.trains.graph.TrackNode;
 import de.bluecolored.bluemap.api.BlueMapAPI;
 import de.bluecolored.bluemap.api.BlueMapMap;
 import de.bluecolored.bluemap.api.markers.LineMarker;
@@ -63,7 +65,9 @@ public class Trains {
         Map<ResourceKey<Level>, MarkerSet> lineMarkerMap = new HashMap<>();
 
         Create.RAILWAYS.trains.forEach((uuid, train) -> {
-            ResourceKey<Level> level = train.carriages.get(0).getLeadingPoint().node1.getLocation().dimension;
+            TrackNode node = train.carriages.get(0).getLeadingPoint().node1;
+            if(node == null) return;
+            ResourceKey<Level> level = node.getLocation().dimension;
             if (!lineMarkerMap.containsKey(level)) {
                 lineMarkerMap.put(level, MarkerSet.builder()
                         .label(String.format("Carriages in %s", level.location().toShortLanguageKey())).build());

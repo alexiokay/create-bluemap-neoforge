@@ -20,12 +20,16 @@ public class Watcher {
             Optional<BlueMapAPI> apiOptional = BlueMapAPI.getInstance();
             apiOptional.ifPresent(api -> {
                 CreateBluemap.LOGGER.info("bluemap api present");
-                Trains.update(api);
-                Tracks.update(api);
+                try {
+                    Trains.update(api);
+                    Tracks.update(api);
+                } catch (Exception e) {
+                    CreateBluemap.LOGGER.error(e.getMessage());
+                }
             });
             CreateBluemap.LOGGER.info("Updated map {}", apiOptional.isPresent());
         };
-        future = scheduler.scheduleAtFixedRate(task, refreshInterval, refreshInterval, TimeUnit.SECONDS);
+        future = scheduler.scheduleAtFixedRate(task, 0, refreshInterval, TimeUnit.SECONDS);
 
     }
 

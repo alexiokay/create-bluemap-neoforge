@@ -49,6 +49,7 @@ public class Trains {
         });
 
         POIMarkerSets.forEach((level, markerSet) -> {
+            CreateBluemap.LOGGER.info("{} trains updated", markerSet.getMarkers().size());
             api.getWorld(level).ifPresent(world -> {
                 for (BlueMapMap map : world.getMaps()) {
                     map.getMarkerSets().put(String.format("trains-%s", level.location().toShortLanguageKey()),
@@ -87,6 +88,7 @@ public class Trains {
 
         lineMarkerMap.forEach((level, markerSet) -> {
             api.getWorld(level).ifPresent(world -> {
+                CreateBluemap.LOGGER.info("{} carriages updated", markerSet.getMarkers().size());
                 for (BlueMapMap map : world.getMaps()) {
                     map.getMarkerSets().put(String.format("carriages-%s", level.location().toShortLanguageKey()),
                             markerSet);

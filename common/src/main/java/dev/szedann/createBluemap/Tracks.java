@@ -17,7 +17,6 @@ import java.util.*;
 
 public class Tracks {
     public static boolean renderTracks = false;
-
     public static void update(BlueMapAPI api) {
         if (!renderTracks)
             return;
@@ -56,6 +55,7 @@ public class Tracks {
         });
 
         lineMarkerSets.forEach((level, markerSet) -> {
+            CreateBluemap.LOGGER.info("{} edges updated", markerSet.getMarkers().size());
             api.getWorld(level).ifPresent(world -> {
                 for (BlueMapMap map : world.getMaps()) {
                     map.getMarkerSets().put(String.format("tracks-%s", level.location().toShortLanguageKey()),

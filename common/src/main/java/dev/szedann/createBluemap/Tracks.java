@@ -16,7 +16,7 @@ import net.minecraft.world.phys.Vec3;
 import java.util.*;
 
 public class Tracks {
-    public static boolean renderTracks = true;
+    public static boolean renderTracks = false;
 
     public static void update(BlueMapAPI api) {
         if (!renderTracks)

@@ -19,6 +19,7 @@ public class Watcher {
             CreateBluemap.LOGGER.info("Updating map");
             Optional<BlueMapAPI> apiOptional = BlueMapAPI.getInstance();
             apiOptional.ifPresent(api -> {
+                CreateBluemap.LOGGER.info("bluemap api present");
                 Trains.update(api);
                 Tracks.update(api);
             });

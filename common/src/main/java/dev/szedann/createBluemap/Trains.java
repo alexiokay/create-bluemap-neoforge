@@ -3,7 +3,6 @@ package dev.szedann.createBluemap;
 import com.flowpowered.math.vector.Vector3d;
 import com.simibubi.create.Create;
 import com.simibubi.create.content.trains.entity.Carriage;
-import com.simibubi.create.content.trains.entity.TravellingPoint;
 import com.simibubi.create.content.trains.graph.TrackNode;
 import de.bluecolored.bluemap.api.BlueMapAPI;
 import de.bluecolored.bluemap.api.BlueMapMap;

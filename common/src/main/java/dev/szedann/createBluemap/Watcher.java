@@ -24,7 +24,7 @@ public class Watcher {
             });
             CreateBluemap.LOGGER.info("Updated map {}", apiOptional.isPresent());
         };
-        future = scheduler.scheduleAtFixedRate(task, 0, refreshInterval, TimeUnit.SECONDS);
+        future = scheduler.scheduleAtFixedRate(task, refreshInterval, refreshInterval, TimeUnit.SECONDS);
 
     }
 

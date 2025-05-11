@@ -12,6 +12,8 @@ public final class CreateBluemap {
         // Write common init code here.
         BlueMapAPI.onEnable(api -> {
             Watcher.start();
+            Tracks.update(api);
+            Trains.update(api);
         });
     }
 

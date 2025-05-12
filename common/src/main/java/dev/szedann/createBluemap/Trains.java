@@ -38,7 +38,8 @@ public class Trains {
 
         Create.RAILWAYS.trains.forEach((uuid, train) -> {
             TrackNode node = train.carriages.get(0).getLeadingPoint().node1;
-            if(node == null) return;
+            if (node == null)
+                return;
             ResourceKey<Level> level = node.getLocation().dimension;
             if (!POIMarkerSets.containsKey(level)) {
                 POIMarkerSets.put(level, MarkerSet.builder()
@@ -70,7 +71,8 @@ public class Trains {
 
         Create.RAILWAYS.trains.forEach((uuid, train) -> {
             TrackNode node = train.carriages.get(0).getLeadingPoint().node1;
-            if(node == null) return;
+            if (node == null)
+                return;
             ResourceKey<Level> level = node.getLocation().dimension;
             if (!lineMarkerMap.containsKey(level)) {
                 lineMarkerMap.put(level, MarkerSet.builder()
@@ -82,8 +84,8 @@ public class Trains {
                 i++;
                 Vec3 p1 = carriage.getLeadingPoint().getPosition(train.graph);
                 Vec3 p2 = carriage.getTrailingPoint().getPosition(train.graph);
-                boolean front = train.currentlyBackwards ? i == train.carriages.size() - 1 : i == 0;
-                boolean scheduled = !train.manualTick;
+                boolean front = train.currentlyBackwards ? i == train.carriages.size() : i == 1;
+                boolean scheduled = train.navigation.isActive();
                 lineMarkerMap.get(level).put(train.id.toString() + "-" + carriage.id, LineMarker.builder()
                         .label(String.format("%s carriage %s", train.name.getString(), i))
                         .line(Line.builder()

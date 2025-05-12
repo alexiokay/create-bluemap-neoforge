@@ -95,7 +95,7 @@ public class Trains {
                         .lineColor(scheduled ? scheduledColor : manualColor)
                         .lineWidth(front ? 7 : 5)
                         .depthTestEnabled(false)
-                        .maxDistance(400)
+                        // .maxDistance(400)
                         .build());
             }
 

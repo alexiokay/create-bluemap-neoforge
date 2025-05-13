@@ -16,6 +16,7 @@ import net.minecraft.world.phys.Vec3;
 import java.util.*;
 
 public class Tracks {
+    private static final Color trackColor = new Color("#fff");
     public static void update(BlueMapAPI api) {
         if (!CreateBluemap.config.renderTracks.get())
             return;
@@ -36,6 +37,7 @@ public class Tracks {
             });
             edges.forEach(edge -> {
                 MarkerSet lineMarkerSet = lineMarkerSets.get(edge.node1.getLocation().dimension);
+                if(edge.isInterDimensional()) return;
                 int segmentCount = edge.isTurn() ? (int) (edge.getLength() / 16) + 2 : 2;
                 Line.Builder line = Line.builder();
                 for (int i = 0; i < segmentCount; i++) {
@@ -45,10 +47,13 @@ public class Tracks {
                 LineMarker marker = LineMarker.builder()
                         .line(line.build())
                         .lineWidth(6)
-                        .maxDistance(300)
+//                        .maxDistance(300)
                         .label("edge")
-                        .lineColor(new Color("#777"))
+                        .depthTestEnabled(false)
+                        .listed(false)
+                        .lineColor(trackColor)
                         .build();
+
                 lineMarkerSet.put(edge.toString(), marker);
 
             });

@@ -16,9 +16,8 @@ import net.minecraft.world.phys.Vec3;
 import java.util.*;
 
 public class Tracks {
-    public static boolean renderTracks = false;
     public static void update(BlueMapAPI api) {
-        if (!renderTracks)
+        if (!CreateBluemap.config.renderTracks.get())
             return;
         Map<ResourceKey<Level>, MarkerSet> lineMarkerSets = new HashMap<>();
 
@@ -31,6 +30,7 @@ public class Tracks {
                 ResourceKey<Level> level = node.getLocation().dimension;
                 if (!lineMarkerSets.containsKey(level)) {
                     lineMarkerSets.put(level, MarkerSet.builder()
+                            .defaultHidden(true)
                             .label(String.format("Tracks in %s", level.location().toShortLanguageKey())).build());
                 }
             });

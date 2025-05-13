@@ -19,16 +19,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Trains {
-    public static boolean renderPOIs = false;
-    public static boolean renderCarriages = true;
-
     private static final Color manualColor = new Color("#f99");
     private static final Color scheduledColor = new Color("#99f");
 
     public static void update(BlueMapAPI api) {
-        if (renderPOIs)
+        if (CreateBluemap.config.renderTrains.get())
             updatePOIs(api);
-        if (renderCarriages)
+        if (CreateBluemap.config.renderCarriages.get())
             updateCarriages(api);
 
     }
@@ -43,6 +40,7 @@ public class Trains {
             ResourceKey<Level> level = node.getLocation().dimension;
             if (!POIMarkerSets.containsKey(level)) {
                 POIMarkerSets.put(level, MarkerSet.builder()
+                        .defaultHidden(true)
                         .label(String.format("Trains in %s", level.location().toShortLanguageKey())).build());
             }
 

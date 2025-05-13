@@ -71,6 +71,9 @@ dependencies {
     // BlueMap
     modLocalRuntime "maven.modrinth:bluemap:5.3-fabric-1.20"
 
+    modImplementation "me.fzzyhmstrs:fzzy_config:$fzzy_config_version+$minecraft_version"
+
+
 
     // Recipe Viewers - Create Fabric supports JEI, REI, and EMI.
     // See root gradle.properties to choose which to use at runtime.

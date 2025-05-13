@@ -40,6 +40,11 @@ subprojects {
         maven { url = "https://maven.tterrag.com/" } // Flywheel on both, Create and Registrate on forge
         maven { url = 'https://repo.bluecolored.de/releases' } // BlueMap
         maven { url = 'https://jitpack.io' }
+        maven { // Fzzy Config
+            name = "FzzyMaven"
+            url = "https://maven.fzzyhmstrs.me/"
+        }
+
 
         exclusiveContent {
             forRepository {

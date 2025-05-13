@@ -34,4 +34,6 @@ dependencies {
 
     modCompileOnly("com.simibubi.create:create-fabric-$minecraft_version:$create_fabric_version")
 
+    modImplementation "me.fzzyhmstrs:fzzy_config:$fzzy_config_version+$minecraft_version"
+
 }

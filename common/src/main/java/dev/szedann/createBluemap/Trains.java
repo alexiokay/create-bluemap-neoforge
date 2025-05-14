@@ -4,6 +4,7 @@ import com.flowpowered.math.vector.Vector3d;
 import com.simibubi.create.Create;
 import com.simibubi.create.content.trains.entity.Carriage;
 import com.simibubi.create.content.trains.graph.TrackNode;
+import com.simibubi.create.content.trains.schedule.ScheduleRuntime;
 import de.bluecolored.bluemap.api.BlueMapAPI;
 import de.bluecolored.bluemap.api.BlueMapMap;
 import de.bluecolored.bluemap.api.markers.LineMarker;
@@ -83,7 +84,7 @@ public class Trains {
                 Vec3 p1 = carriage.getLeadingPoint().getPosition(train.graph);
                 Vec3 p2 = carriage.getTrailingPoint().getPosition(train.graph);
                 boolean front = train.currentlyBackwards ? i == train.carriages.size() : i == 1;
-                boolean scheduled = train.navigation.isActive();
+                boolean scheduled = train.runtime.state == ScheduleRuntime.State.IN_TRANSIT;
                 lineMarkerMap.get(level).put(train.id.toString() + "-" + carriage.id, LineMarker.builder()
                         .label(String.format("%s carriage %s", train.name.getString(), i))
                         .line(Line.builder()

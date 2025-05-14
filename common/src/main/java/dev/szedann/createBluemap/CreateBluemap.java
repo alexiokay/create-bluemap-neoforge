@@ -17,6 +17,10 @@ public final class CreateBluemap {
 //            Tracks.update(api);
 //            Trains.update(api);
         });
+
+        BlueMapAPI.onDisable(api -> {
+            Watcher.stop();
+        });
     }
 
     public static ResourceLocation asResource(String name) {

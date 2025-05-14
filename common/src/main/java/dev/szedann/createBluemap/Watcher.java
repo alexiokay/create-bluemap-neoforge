@@ -9,7 +9,6 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 public class Watcher {
-    static long refreshInterval = 5;
     private static final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
     private static ScheduledFuture<?> future;
 
@@ -26,7 +25,7 @@ public class Watcher {
                 }
             });
         };
-        future = scheduler.scheduleAtFixedRate(task, 0, refreshInterval, TimeUnit.SECONDS);
+        future = scheduler.scheduleAtFixedRate(task, 0, CreateBluemap.config.interval.get(), TimeUnit.SECONDS);
 
     }
 

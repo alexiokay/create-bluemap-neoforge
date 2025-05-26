@@ -30,9 +30,7 @@
     "java": ">=17",
     "architectury": ">=9.2.14",
     "fabric-api": "*",
-    "fzzy_config": ">=0.6.9"
-  },
-  "suggests": {
-    "another-mod": "*"
+    "fzzy_config": ">=0.6.9",
+    "create": ">=0.5.1-j"
   }
 }

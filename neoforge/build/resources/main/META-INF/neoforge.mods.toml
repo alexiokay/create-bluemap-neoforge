@@ -1,0 +1,26 @@
+modLoader="javafml"
+loaderVersion="[4,)"
+license="MIT"
+
+[[mods]]
+modId="create_bluemap"
+version="1.0.0+neoforge-1.21.1"
+displayName="Create Bluemap"
+authors="szedann"
+description='''
+Integration between Create mod and BlueMap for visualizing trains and tracks.
+'''
+
+[[dependencies.create_bluemap]]
+modId="minecraft"
+type="required"
+versionRange="[1.21,1.22)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.create_bluemap]]
+modId="neoforge"
+type="required"
+versionRange="[21.0.0-beta,)"
+ordering="NONE"
+side="BOTH"

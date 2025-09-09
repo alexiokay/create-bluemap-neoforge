@@ -1,0 +1,4 @@
+1. add adding icons to train so they wil be dispalyed in map
+2. after hovering/clicking on the train iicon we can see its properties? wheer is going , speed etc.
+3. check if auto defauly train icon detection works
+3. fix create textures of trains generation.

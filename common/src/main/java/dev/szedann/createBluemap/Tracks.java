@@ -32,7 +32,7 @@ public class Tracks {
                 ResourceKey<Level> level = node.getLocation().dimension;
                 if (!lineMarkerSets.containsKey(level)) {
                     lineMarkerSets.put(level, MarkerSet.builder()
-                            .defaultHidden(true)
+                            .defaultHidden(!CreateBluemap.config.tracksVisibleByDefault.get())
                             .label(String.format("Tracks in %s", level.location().toShortLanguageKey())).build());
                 }
             });

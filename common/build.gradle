@@ -4,7 +4,17 @@ architectury {
 
 
 repositories {
-    // mavens for Create Fabric and dependencies
+    // NeoForge maven repository
+    maven {
+        name = 'NeoForged'
+        url = 'https://maven.neoforged.net/releases/'
+    }
+    
+    // Create maven repositories
+    maven { url = "https://maven.createmod.net" } // Create, Ponder, Flywheel
+    maven { url = "https://maven.ithundxr.dev/snapshots" } // Registrate
+    
+    // mavens for Create and dependencies
     maven { url = "https://mvn.devos.one/releases" } // Porting Lib releases
     maven { url = "https://mvn.devos.one/snapshots" } // Create and several dependencies
     maven { url = "https://maven.jamieswhiteshirt.com/libs-release" } // Reach Entity Attributes
@@ -17,23 +27,31 @@ repositories {
 
     maven { url = "https://maven.shedaniel.me" } // Cloth Config, REI
     maven { url = "https://maven.blamejared.com" } // JEI
-
-    maven { url = "https://api.modrinth.com/maven" } // LazyDFU
     maven { url = "https://maven.terraformersmc.com/releases" } // Mod Menu, EMI
+    
+    maven { url = "https://api.modrinth.com/maven" } // BlueMap
+
+    //for (neo)forge
+    maven {
+        url = "https://thedarkcolour.github.io/KotlinForForge/"
+    }
 }
 
+
+// Mojang ships Java 21 to end users in 1.21, so mods should target Java 21.
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
 dependencies {
-    // We depend on Fabric Loader here to use the Fabric @Environment annotations,
-    // which get remapped to the correct annotations on each platform.
-    // Do NOT use other classes from Fabric Loader.
-    modImplementation "net.fabricmc:fabric-loader:$rootProject.fabric_loader_version"
+    // NeoForge dependency for Loom
+    neoForge "net.neoforged:neoforge:$rootProject.neoforge_version"
 
     modImplementation "dev.architectury:architectury:$rootProject.architectury_api_version"
 
     compileOnly 'de.bluecolored.bluemap:BlueMapAPI:2.7.2'
 
-    modCompileOnly("com.simibubi.create:create-fabric-$minecraft_version:$create_fabric_version")
+    // Create mod dependency for NeoForge
+    modCompileOnly("com.simibubi.create:create-$minecraft_version:$create_neoforge_version:slim") { transitive = false }
 
-    modImplementation "me.fzzyhmstrs:fzzy_config:$fzzy_config_version+$minecraft_version"
+    modImplementation "me.fzzyhmstrs:fzzy_config:$fzzy_config_neoforge_version"
 
 }
